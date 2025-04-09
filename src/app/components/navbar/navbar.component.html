@@ -1,0 +1,9 @@
+<nav>
+    <ng-container *ngIf="loggedInUser; else guestLinks">
+      <span>Hello, {{ loggedInUser.name }}!</span>
+      <button (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-template #guestLinks>
+        <a routerLink="/">Home</a> | <a routerLink="/register">Register</a> | <a routerLink="/login">Login</a>
+    </ng-template>
+</nav>

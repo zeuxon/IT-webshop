@@ -1,0 +1,14 @@
+<h2>Products</h2>
+<ul>
+  <li *ngFor="let product of products">
+    <strong>{{ product.name }}</strong> - ${{ product.price }}
+    <br />
+    Category: {{ product.category.name }}
+    <br />
+    Stock: {{ product.stock }}
+    <br />
+    <img [src]="product.imageUrl" alt="{{ product.name }}" width="100" />
+    <p>{{ product.description }}</p>
+    <button (click)="addToOrder(product)">Add to Order</button>
+  </li>
+</ul>
