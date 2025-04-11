@@ -9,27 +9,20 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { UserService } from './services/user.service';
 import { OrderComponent } from './components/order/order.component';
 import { NavbarComponent } from "./components/navbar/navbar.component";
+import { DUMMY_CATEGORIES } from './models/dummy-categories';
+import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, ProductListComponent, OrderComponent, NavbarComponent],
+  imports: [CommonModule, RouterModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'IT-webshop';
 
-  // Mock data
-  categories: Category[] = [
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Accessories' }
-  ];
-
-  products: Product[] = [
-    { id: 1, name: 'Laptop', price: 1000, category: this.categories[0], stock: 10, imageUrl: 'laptop.jpg', description: 'A high-performance laptop' },
-    { id: 2, name: 'Mouse', price: 20, category: this.categories[1], stock: 50, imageUrl: 'mouse.jpg', description: 'A wireless mouse' }
-  ];
+  categories: Category[] = DUMMY_CATEGORIES;
 
   orders: Order[] = [];
 

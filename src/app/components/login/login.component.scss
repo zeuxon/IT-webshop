@@ -1,0 +1,72 @@
+$primary-color: #3f51b5; // Blue
+$secondary-color: #673ab7; // Purple
+$accent-color: #2196f3; // Light Blue
+$background-color: #f3f4f6; // Light Gray
+
+mat-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: $background-color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border: 1px solid $accent-color;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: $secondary-color;
+  font-weight: bold;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  mat-label {
+    color: $secondary-color;
+  }
+
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $secondary-color;
+    cursor: pointer;
+  }
+}
+
+mat-error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+mat-hint {
+  color: green;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 400px) {
+  mat-card {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+  }
+}

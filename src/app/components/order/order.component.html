@@ -1,13 +1,32 @@
-<h2>Orders</h2>
-<ul>
-  <li *ngFor="let order of orders">
-    <strong>Order ID:</strong> {{ order.id }} <br />
-    <strong>User ID:</strong> {{ order.userId }} <br />
-    <strong>Products:</strong>
-    <ul>
-      <li *ngFor="let item of order.products">
-        {{ item.product.name }} (x{{ item.quantity }})
-      </li>
-    </ul>
-  </li>
-</ul>
+<h2>Cart</h2>
+<div class="order-container">
+  <mat-card *ngFor="let order of orders" class="order-card">
+    <mat-card-header>
+      <h3>Products:</h3>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div *ngIf="order.products.length === 0; else productList">
+        <p>No products in the cart.</p>
+      </div>
+      <ng-template #productList>
+        <div class="product-list">
+          <mat-card *ngFor="let item of order.products" class="product-card">
+            <p>{{ item.product.name }} (x{{ item.quantity }})</p>
+            <div class="product-actions">
+              <button mat-icon-button color="primary" (click)="increaseQuantity(order.id, item.product.id)">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="decreaseQuantity(order.id, item.product.id)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteProduct(order.id, item.product.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-card>
+        </div>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>

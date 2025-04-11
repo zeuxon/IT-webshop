@@ -1,14 +1,29 @@
 <h2>Products</h2>
-<ul>
-  <li *ngFor="let product of products">
-    <strong>{{ product.name }}</strong> - ${{ product.price }}
-    <br />
-    Category: {{ product.category.name }}
-    <br />
-    Stock: {{ product.stock }}
-    <br />
-    <img [src]="product.imageUrl" alt="{{ product.name }}" width="100" />
-    <p>{{ product.description }}</p>
-    <button (click)="addToOrder(product)">Add to Order</button>
-  </li>
-</ul>
+
+<app-category-filter
+  [categories]="categories"
+  (categorySelected)="onCategorySelected($event)">
+</app-category-filter>
+
+<div class="filter-options">
+  <button (click)="filterProducts('inStock')">In Stock</button>
+  <button (click)="filterProducts('lowPrice')">Low Price</button>
+  <button (click)="filterProducts('highPrice')">High Price</button>
+  <button (click)="filterProducts('')">Reset</button>
+</div>
+
+<div class="product-list">
+  <div class="product-card" *ngFor="let product of filteredProducts">
+    <img [src]="product.imageUrl" alt="{{ product.name }}" />
+    <div class="product-details">
+      <h3>{{ product.name }}</h3>
+      <p class="price">{{ product.price | priceFormat }}</p>
+      <p>Category: {{ product.category.name }}</p>
+      <p>Stock: {{ product.stock }}</p>
+      <p>{{ product.description }}</p>
+    </div>
+    <div class="product-actions">
+      <button (click)="addToOrder(product)">Add to Order</button>
+    </div>
+  </div>
+</div>
