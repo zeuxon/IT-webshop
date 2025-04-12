@@ -21,7 +21,7 @@ export class LoginComponent {
   login(): void {
     const success = this.userService.login(this.email, this.password);
     if (success) {
-      this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+      this.snackBar.open('Login successful!', 'Close', { duration: 3000, verticalPosition: 'top'});
     } else {
       this.errorMessage = 'Invalid email or password.';
     }

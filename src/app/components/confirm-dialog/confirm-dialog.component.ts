@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
     <mat-dialog-content>{{ data.message }}</mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button (click)="onCancel()">Cancel</button>
-      <button mat-button color="primary" (click)="onConfirm()">Confirm</button>
+      <button mat-button (click)="onConfirm()">Confirm</button>
     </mat-dialog-actions>
   `,
   standalone: true,

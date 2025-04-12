@@ -6,14 +6,14 @@
 </app-category-filter>
 
 <div class="filter-options">
-  <button (click)="filterProducts('inStock')">In Stock</button>
-  <button (click)="filterProducts('lowPrice')">Low Price</button>
-  <button (click)="filterProducts('highPrice')">High Price</button>
-  <button (click)="filterProducts('')">Reset</button>
+  <button appTextTransform (click)="filterProducts('inStock')">In Stock</button>
+  <button appTextTransform (click)="filterProducts('lowPrice')">Low Price</button>
+  <button appTextTransform (click)="filterProducts('highPrice')">High Price</button>
+  <button appTextTransform (click)="filterProducts('')">Reset</button>
 </div>
 
 <div class="product-list">
-  <div class="product-card" *ngFor="let product of filteredProducts">
+  <div class="product-card" *ngFor="let product of filteredProducts" appHighlight="lightyellow">
     <img [src]="product.imageUrl" alt="{{ product.name }}" />
     <div class="product-details">
       <h3>{{ product.name }}</h3>
