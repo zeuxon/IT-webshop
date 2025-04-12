@@ -1,4 +1,4 @@
-<h2>Cart</h2>
+<h2>Your Cart</h2>
 <div class="order-container">
   <mat-card *ngFor="let order of orders" class="order-card">
     <mat-card-header>
@@ -12,7 +12,9 @@
       <ng-template #productList>
         <div class="product-list">
           <mat-card *ngFor="let item of order.products" class="product-card">
+            <img [src]="item.product.imageUrl" alt="{{ item.product.name }}" />
             <p>{{ item.product.name }} (x{{ item.quantity }})</p>
+            <p>{{ item.product.price | priceFormat }}</p>
             <div class="product-actions">
               <button mat-icon-button color="primary" (click)="increaseQuantity(order.id, item.product.id)">
                 <mat-icon>add</mat-icon>

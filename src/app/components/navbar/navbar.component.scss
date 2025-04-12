@@ -1,0 +1,66 @@
+@use "sass:color";
+
+$primary-color: #3f51b5;
+$secondary-color: #673ab7;
+$accent-color: #2196f3;
+$background-color: #f3f4f6;
+
+mat-toolbar {
+  background-color: $primary-color;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .desktop-links {
+    display: flex;
+    gap: 10px;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: -10%);
+    }
+  }
+
+  mat-icon {
+    color: $accent-color;
+  }
+}
+
+@media (max-width: 600px) {
+  mat-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .desktop-links {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+}

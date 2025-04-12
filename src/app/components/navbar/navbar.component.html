@@ -2,15 +2,41 @@
   <span>IT Webshop</span>
   <span class="spacer"></span>
   <ng-container *ngIf="loggedInUser; else guestLinks">
-    <button mat-button routerLink="/">Home</button>
-    <button mat-button routerLink="/order">
-      <mat-icon>shopping_cart</mat-icon> Kosár
-    </button>
-    <button mat-button (click)="logout()">Logout</button>
+    <div class="desktop-links">
+      <button mat-button routerLink="/">Home</button>
+      <button mat-button routerLink="/order">
+        <mat-icon>shopping_cart</mat-icon> Cart
+      </button>
+      <button mat-button (click)="logout()">Logout</button>
+    </div>
+    <div class="mobile-menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/">Home</button>
+        <button mat-menu-item routerLink="/order">
+          <mat-icon>shopping_cart</mat-icon> Cart
+        </button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
   </ng-container>
   <ng-template #guestLinks>
-    <button mat-button routerLink="/">Home</button>
-    <button mat-button routerLink="/register">Register</button>
-    <button mat-button routerLink="/login">Login</button>
+    <div class="desktop-links">
+      <button mat-button routerLink="/">Home</button>
+      <button mat-button routerLink="/register">Register</button>
+      <button mat-button routerLink="/login">Login</button>
+    </div>
+    <div class="mobile-menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/">Home</button>
+        <button mat-menu-item routerLink="/register">Register</button>
+        <button mat-menu-item routerLink="/login">Login</button>
+      </mat-menu>
+    </div>
   </ng-template>
 </mat-toolbar>

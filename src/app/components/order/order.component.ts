@@ -3,13 +3,14 @@ import { Order } from '../../models/order.model';
 import { OrderService } from '../../services/order.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material.module';
+import { PriceFormatPipe } from '../../pipes/price-format.pipe';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, PriceFormatPipe],
 })
 export class OrderComponent implements OnInit {
   orders: Order[] = [];
