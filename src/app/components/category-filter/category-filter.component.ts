@@ -10,10 +10,10 @@ import { CommonModule } from '@angular/common';
 })
 export class CategoryFilterComponent {
   @Input() categories: Category[] = [];
-  @Output() categorySelected = new EventEmitter<number>();
+  @Output() categorySelected = new EventEmitter<string>();
 
-  onCategoryChange(event: Event): void {
-    const selectedCategoryId = +(event.target as HTMLSelectElement).value;
-    this.categorySelected.emit(selectedCategoryId);
+  onCategoryChange(event: Event) {
+    const select = event.target as HTMLSelectElement;
+    this.categorySelected.emit(select.value);
   }
 }

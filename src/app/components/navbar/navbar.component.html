@@ -4,8 +4,14 @@
   <ng-container *ngIf="loggedInUser; else guestLinks">
     <div class="desktop-links">
       <button mat-button routerLink="/">Home</button>
+      <div *ngIf="isAdminUser">
+        <button mat-button routerLink="/admin">Admin</button>
+      </div>
       <button mat-button routerLink="/order">
         <mat-icon>shopping_cart</mat-icon> Cart
+      </button>
+      <button mat-button routerLink="/profile">
+        <mat-icon>person</mat-icon> Profile
       </button>
       <button mat-button (click)="logout()">Logout</button>
     </div>

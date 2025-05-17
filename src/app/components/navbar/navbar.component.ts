@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -13,11 +13,9 @@ import { MatMenu } from '@angular/material/menu';
   imports: [CommonModule, RouterModule, MaterialModule, MatMenu, MatMenuTrigger],
 })
 export class NavbarComponent {
+  @Input() isAdminUser: boolean = false;
+  @Input() loggedInUser: any;
   constructor(private userService: UserService) {}
-
-  get loggedInUser() {
-    return this.userService.getLoggedInUser();
-  }
 
   logout(): void {
     this.userService.logout();

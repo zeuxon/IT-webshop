@@ -8,7 +8,7 @@ import { Product } from '../models/product.model';
 export class OrderService {
   private orders: Order[] = [
     {
-      id: 1,
+      id: '1',
       userId: 123,
       products: []
     }

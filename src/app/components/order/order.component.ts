@@ -21,14 +21,14 @@ export class OrderComponent implements OnInit {
     this.orders = this.orderService.getOrders();
   }
 
-  deleteProduct(orderId: number, productId: number): void {
+  deleteProduct(orderId: string, productId: string): void {
     const order = this.orders.find(o => o.id === orderId);
     if (order) {
       order.products = order.products.filter(item => item.product.id !== productId);
     }
   }
 
-  increaseQuantity(orderId: number, productId: number): void {
+  increaseQuantity(orderId: string, productId: string): void {
     const order = this.orders.find(o => o.id === orderId);
     if (order) {
       const product = order.products.find(item => item.product.id === productId);
@@ -38,7 +38,7 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  decreaseQuantity(orderId: number, productId: number): void {
+  decreaseQuantity(orderId: string, productId: string): void {
     const order = this.orders.find(o => o.id === orderId);
     if (order) {
       const product = order.products.find(item => item.product.id === productId);

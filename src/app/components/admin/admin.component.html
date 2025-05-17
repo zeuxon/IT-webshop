@@ -1,0 +1,40 @@
+<h2 class="admin-title">Admin Panel – Manage Products</h2>
+
+<form class="admin-form" (ngSubmit)="onSubmit()" #productForm="ngForm">
+  <div class="form-row">
+    <input #nameInput type="text" name="name" [(ngModel)]="product.name" placeholder="Product Name" required>
+    <input type="number" name="price" [(ngModel)]="product.price" placeholder="Price" required>
+    <input type="text" name="category" [(ngModel)]="product.category" placeholder="Category" required>
+    <input type="number" name="stock" [(ngModel)]="product.stock" placeholder="Stock" required>
+  </div>
+  <div class="form-row">
+    <input type="text" name="imageUrl" [(ngModel)]="product.imageUrl" placeholder="Image URL">
+    <!-- <input type="file" (change)="onFileSelected($event)" /> -->
+  </div>
+  <div class="form-row">
+    <textarea name="description" [(ngModel)]="product.description" placeholder="Description"></textarea>
+  </div>
+  <div class="form-actions">
+    <button type="submit">{{ editing ? 'Update' : 'Add' }} Product</button>
+    <button type="button" *ngIf="editing" (click)="cancelEdit()">Cancel</button>
+  </div>
+</form>
+
+<hr>
+
+<div class="product-list">
+  <div class="product-card" *ngFor="let p of products">
+    <img [src]="p.imageUrl" alt="{{ p.name }}" width="80" class="product-image"/>
+    <div class="product-info">
+      <h3>{{ p.name }}</h3>
+      <p><strong>Price:</strong> {{ p.price }}</p>
+      <p><strong>Category:</strong> {{ p.category }}</p>
+      <p><strong>Stock:</strong> {{ p.stock }}</p>
+      <p>{{ p.description }}</p>
+      <div class="product-actions">
+        <button (click)="editProduct(p)">Edit</button>
+        <button (click)="deleteProduct(p.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,23 +1,21 @@
 <mat-card>
   <h2>Create an Account</h2>
-  <form (ngSubmit)="register()">
-    <mat-form-field appearance="fill">
-      <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="user.name" name="name" required />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]="user.email" name="email" type="email" required />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Password</mat-label>
-      <input matInput [(ngModel)]="user.password" name="password" type="password" required />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Address</mat-label>
-      <input matInput [(ngModel)]="user.address" name="address" />
-    </mat-form-field>
-    <button type="submit">Register</button>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <input type="text" placeholder="Username" formControlName="username" required/>
+    </div>
+    <div>
+      <input type="text" placeholder="Email" formControlName="email" required/>
+    </div>
+    <div>
+      <input type="password" placeholder="Password" formControlName="password" required/>
+    </div>
+    <div>
+      <input type="text" placeholder="Address" formControlName="address" required/>
+    </div>
+    <div>
+      <button type="submit">Sign Up</button>
+    </div>
   </form>
   <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
   <mat-hint *ngIf="successMessage">{{ successMessage }}</mat-hint>

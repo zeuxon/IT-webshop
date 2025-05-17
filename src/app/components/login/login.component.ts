@@ -1,31 +1,42 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatCard } from '@angular/material/card';
+import { MatError } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '../../material.module';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  imports: [CommonModule, FormsModule, MaterialModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, MatCard, MatError, CommonModule],
 })
 export class LoginComponent {
-  email = '';
-  password = '';
-  errorMessage = '';
+  fb = inject(FormBuilder);
+  http = inject(HttpClient);
+  router = inject(Router);
+  userService = inject(UserService);
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar, private router: Router) {}
+  form = this.fb.nonNullable.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+  });
+  errorMessage: string | null = null;
 
-  login(): void {
-    const success = this.userService.login(this.email, this.password);
-    if (success) {
-      this.snackBar.open('Login successful!', 'Close', { duration: 3000, verticalPosition: 'top'});
-      this.router.navigate(['/home']);
-    } else {
-      this.errorMessage = 'Invalid email or password.';
-    }
+  onSubmit(): void {
+    const rawForm = this.form.getRawValue();
+
+    this.userService
+      .login(rawForm.email, rawForm.password)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          this.errorMessage = error.message;
+        },
+      });
   }
 }

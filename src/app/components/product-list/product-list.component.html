@@ -12,14 +12,19 @@
   <button appTextTransform (click)="filterProducts('')">Reset</button>
 </div>
 
+<button (click)="showTop5Expensive()">Top 5 most expensive</button>
+<button (click)="filterByPriceRange(1000, 5000)">1000-5000 USD</button>
+<button (click)="showCheapestInStock()">10 Cheapest In Stock</button>
+<button (click)="resetFilters()">Reset</button>
+
 <div class="product-list">
   <div class="product-card" *ngFor="let product of filteredProducts" appHighlight="lightyellow">
-    <img [src]="product.imageUrl" alt="{{ product.name }}" />
+    <img [src]="product.imageUrl" alt="Sajnos nem sikerült megoldani a képfeltöltést:(" />
     <div class="product-details">
       <h3>{{ product.name }}</h3>
       <p class="price">{{ product.price | priceFormat }}</p>
       <p>Category: {{ product.category.name }}</p>
-      <p>Stock: {{ product.stock }}</p>
+      <p>{{ product.stock | stockStatus }}</p>
       <p>{{ product.description }}</p>
     </div>
     <div class="product-actions">

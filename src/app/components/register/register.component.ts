@@ -1,59 +1,46 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatError, MatHint } from '@angular/material/input';
+import { MatCard } from '@angular/material/card';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '../../material.module';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  imports: [CommonModule, FormsModule, MaterialModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, MatError, MatHint, MatCard, CommonModule],
 })
 export class RegisterComponent {
-  user: User = { id: 0, name: '', email: '', password: '', address: '' };
-  successMessage = '';
-  errorMessage = '';
+  fb = inject(FormBuilder);
+  http = inject(HttpClient);
+  userService = inject(UserService);
+  router = inject(Router);
 
-  constructor(private userService: UserService) {}
+  form = this.fb.nonNullable.group({
+    username: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+    address: ['', Validators.required],
+  });
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
 
-  register(): void {
-    if (!this.user.name.trim()) {
-      this.errorMessage = 'Name is required.';
-      this.successMessage = '';
-      return;
-    }
+  onSubmit(): void {
+    const rawForm = this.form.getRawValue();
 
-    if (!this.user.email.trim() || !this.validateEmail(this.user.email)) {
-      this.errorMessage = 'A valid email is required.';
-      this.successMessage = '';
-      return;
-    }
-
-    if (!this.user.password.trim() || this.user.password.length < 6) {
-      this.errorMessage = 'Password must be at least 6 characters long.';
-      this.successMessage = '';
-      return;
-    }
-
-    if (!this.user.address.trim()) {
-      this.errorMessage = 'Address is required.';
-      this.successMessage = '';
-      return;
-    }
-
-    const success = this.userService.register(this.user);
-    if (success) {
-      this.successMessage = 'Registration successful!';
-      this.errorMessage = '';
-    } else {
-      this.errorMessage = 'Email already exists.';
-      this.successMessage = '';
-    }
-  }
-
-  private validateEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    this.userService
+      .register(rawForm.username, rawForm.email, rawForm.password, rawForm.address)
+      .subscribe({
+        next: () => {
+          this.successMessage = 'Registration successful!';
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          this.errorMessage = error.message;
+        },
+      });
   }
 }

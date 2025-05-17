@@ -1,2 +1,2 @@
-<app-navbar></app-navbar>
+<app-navbar [isAdminUser]="isAdminUser" [loggedInUser]="userService.getLoggedInUser()"></app-navbar>
 <router-outlet></router-outlet>
