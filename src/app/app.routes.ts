@@ -14,6 +14,6 @@ export const routes: Routes = [
   { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminPanelComponent, canActivate: [AdminAuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: '', component: ProductListComponent },
+  { path: '', component: ProductListComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
